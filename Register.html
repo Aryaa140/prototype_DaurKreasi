@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - DaurKreasi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset dan variabel */
+        :root {
+            --primary: #2E8B57;
+            --primary-dark: #1e6b42;
+            --secondary: #FFD700;
+            --light: #F5F5F5;
+            --dark: #333333;
+            --gray: #777777;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--dark);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e6c200;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .auth-buttons .btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Form Pages */
+        .form-page {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(46, 139, 87, 0.1) 0%, rgba(255, 215, 0, 0.1) 100%);
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .form-header h1 {
+            color: var(--primary);
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .form-header p {
+            color: var(--gray);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2);
+        }
+        
+        .form-footer {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .form-footer p {
+            color: var(--gray);
+            margin-top: 15px;
+        }
+        
+        .form-footer a {
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            transition: var(--transition);
+            opacity: 0.8;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            opacity: 0.7;
+        }
+        
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            z-index: 999;
+            padding: 80px 30px 30px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 30px;
+            overflow-y: auto;
+        }
+        
+        .mobile-nav.active {
+            display: flex;
+        }
+        
+        .mobile-nav .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .mobile-nav .nav-links a {
+            font-size: 20px;
+            font-weight: 600;
+        }
+        
+        .mobile-nav .auth-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .mobile-nav .auth-buttons .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--dark);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .form-container {
+                padding: 30px 20px;
+            }
+            
+            .form-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <i class="fas fa-recycle"></i>
+                    <span class="logo-text">DaurKreasi</span>
+                </div>
+                
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="index.html#features">Fitur</a></li>
+                    <li><a href="index.html#how-it-works">Cara Kerja</a></li>
+                    <li><a href="index.html#products">Produk</a></li>
+                    <li><a href="index.html#testimonials">Testimoni</a></li>
+                </ul>
+                
+                <div class="auth-buttons">
+                    <a href="login.html" class="btn btn-secondary">Masuk</a>
+                    <a href="register.html" class="btn btn-primary">Daftar</a>
+                </div>
+                
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <div class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="mobile-nav-link">Beranda</a></li>
+            <li><a href="index.html#features" class="mobile-nav-link">Fitur</a></li>
+            <li><a href="index.html#how-it-works" class="mobile-nav-link">Cara Kerja</a></li>
+            <li><a href="index.html#products" class="mobile-nav-link">Produk</a></li>
+            <li><a href="index.html#testimonials" class="mobile-nav-link">Testimoni</a></li>
+        </ul>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn btn-secondary">Masuk</a>
+            <a href="register.html" class="btn btn-primary">Daftar</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Halaman Daftar -->
+        <section class="form-page">
+            <div class="container">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h1>Daftar Akun Baru</h1>
+                        <p>Bergabunglah dengan komunitas kreator daur ulang Indonesia</p>
+                    </div>
+                    
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label for="fullName" class="form-label">Nama Lengkap</label>
+                            <input type="text" id="fullName" class="form-control" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="emailRegister" class="form-label">Email</label>
+                            <input type="email" id="emailRegister" class="form-control" placeholder="nama@contoh.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="passwordRegister" class="form-label">Kata Sandi</label>
+                            <input type="password" id="passwordRegister" class="form-control" placeholder="Buat kata sandi yang kuat" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">Konfirmasi Kata Sandi</label>
+                            <input type="password" id="confirmPassword" class="form-control" placeholder="Ulangi kata sandi Anda" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="userType" class="form-label">Saya ingin bergabung sebagai:</label>
+                            <select id="userType" class="form-control" required>
+                                <option value="">Pilih peran Anda</option>
+                                <option value="creator">Kreator (Penjual)</option>
+                                <option value="buyer">Pembeli</option>
+                                <option value="both">Keduanya</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="checkbox" id="agreeTerms" required>
+                            <label for="agreeTerms">Saya setuju dengan <a href="#">Syarat & Ketentuan</a> dan <a href="#">Kebijakan Privasi</a> DaurKreasi</label>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Daftar Sekarang</button>
+                        
+                        <div class="form-footer">
+                            <p>Sudah punya akun? <a href="login.html">Masuk di sini</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>DaurKreasi</h3>
+                    <p>Platform khusus untuk para pendaur ulang kreatif di Indonesia untuk memamerkan dan memonetisasi kerajinan daur ulang mereka.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Tautan Cepat</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Beranda</a></li>
+                        <li><a href="index.html#features">Fitur</a></li>
+                        <li><a href="index.html#how-it-works">Cara Kerja</a></li>
+                        <li><a href="index.html#products">Produk</a></li>
+                        <li><a href="index.html#testimonials">Testimoni</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Untuk Kreator</h3>
+                    <ul class="footer-links">
+                        <li><a href="register.html">Mulai Menjual</a></li>
+                        <li><a href="#">Panduan Kreator</a></li>
+                        <li><a href="#">Komunitas</a></li>
+                        <li><a href="#">Sumber Daya</a></li>
+                        <li><a href="#">Program Afiliasi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Bantuan</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Pusat Bantuan</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 DaurKreasi. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.getElementById('closeMenu');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        
+        // Open mobile menu
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Close mobile menu
+        closeMenuBtn.addEventListener('click', function() {
+            mobileNav.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close mobile menu when clicking on a link
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+        
+        // Register form submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const password = document.getElementById('passwordRegister').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    if (password !== confirmPassword) {
+                        alert('Kata sandi tidak cocok!');
+                        return;
+                    }
+                    
+                    // In a real app, you would send this data to a server
+                    alert('Pendaftaran berhasil! Silakan masuk ke akun Anda.');
+                    window.location.href = 'login.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
